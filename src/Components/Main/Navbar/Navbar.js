@@ -67,7 +67,7 @@ const Navbar = () => {
             <label
               // data-act-class="ACTIVECLASS"
               // data-toggle-theme="dark,light"
-              className="swap swap-rotate absolute right-14 visible lg:hidden bg-gray-800 p-5 top-2  z-50 cursor-pointer   btn-sm btn  "
+              className="swap swap-rotate w-12 mr-2 visible lg:hidden bg-gray-200  dark:bg-gray-800  p-5   z-50 cursor-pointer   btn-sm btn  "
               // data-choose-theme
             >
               <input type="checkbox" />
