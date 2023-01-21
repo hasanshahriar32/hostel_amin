@@ -4,12 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Analytics } from "@vercel/analytics/react";
+import { registerLicense } from "@syncfusion/ej2-base";
+
+registerLicense(
+  "ORg4AjUWIQA/Gnt2VVhkQlFaclxJXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxQdkRiXn5YdHNQR2FaVEI="
+);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Analytics>
-      <App />
-    </Analytics>
+    <Analytics />
+    <App />
   </React.StrictMode>
 );
 
