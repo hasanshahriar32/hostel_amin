@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Analytics } from "@vercel/analytics/react";
 import { registerLicense } from "@syncfusion/ej2-base";
 import UserContext from "./Components/Auth/Context/UserContext";
+  import 'react-toastify/dist/ReactToastify.css';
 registerLicense(
   "ORg4AjUWIQA/Gnt2VVhkQlFaclxJXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxQdkRiXn5YdHNQR2FaVEI="
 );

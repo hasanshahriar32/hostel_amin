@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import GLOBE from "vanta/dist/vanta.globe.min";
 import { FcGoogle } from "react-icons/fc";
 import "../Login/login.css";
+import Providers from "../../Auth/Providers/Providers";
 import { BsGithub } from "react-icons/bs";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
@@ -85,14 +86,7 @@ const Register = () => {
               </div>
             </form>
             <div class="divider mx-12">OR</div>
-            <div className="flex mx-16 justify-around items-center  mb-6">
-              <button className="btn btn-ghost btn-circle ">
-                <FcGoogle className="text-4xl" />
-              </button>
-              <button className="btn btn-ghost btn-circle ">
-                <BsGithub className="text-4xl" />
-              </button>
-            </div>
+            <Providers></Providers>
             <p className="label-text-alt mb-6 ">
               already a user?{" "}
               <span className="text-secondary link link-hover">
