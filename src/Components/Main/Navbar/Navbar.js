@@ -1,18 +1,31 @@
 import React, { useState } from "react";
 import { AiOutlineLogin } from "react-icons/ai";
-
+import { useContext } from "react";
 import { GoLocation } from "react-icons/go";
 import { Link, NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { themeChange } from "theme-change";
+import { AuthContext } from "../../Auth/Context/UserContext";
 
 const Navbar = () => {
   const [theme, setTheme] = useState("Color Theme");
+   const { user, logOut } = useContext(AuthContext);
   useEffect(() => {}, [setTheme]);
   useEffect(() => {
     themeChange(false);
     // 👆 false parameter is required for react project
   }, []);
+  const handleLogout = () => {
+    logOut()
+      .then((res) => {
+        console.log(res);
+        //remove jwt from localstorage
+        localStorage.removeItem("token");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
       <div className="navbar bg-base-300">
@@ -59,7 +72,7 @@ const Navbar = () => {
             href="https://maps.app.goo.gl/rgG9gV6fQRn3SFT46"
             className="btn btn-ghost flex justify-between items-center w-52 normal-case text-xl"
           >
-            <GoLocation></GoLocation> আমিন ছাত্রাবাস
+            <GoLocation className="text-bold"></GoLocation> আমিন ছাত্রাবাস
           </a>
         </div>
         <div className="navbar-end">
@@ -169,18 +182,72 @@ const Navbar = () => {
                     Cyberpunk
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    data-set-theme="autumn"
+                    onClick={() => setTheme("Autumn")}
+                    data-act-class="ACTIVECLASS"
+                  >
+                    Autumn
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    data-set-theme="lemonade"
+                    onClick={() => setTheme("Lemonade")}
+                    data-act-class="ACTIVECLASS"
+                  >
+                    Lemonade
+                  </Link>
+                </li>
               </ul>
             </li>
           </ul>
 
           {/* theme toggle end  */}
-
-          <button className="btn btn-ghost btn-circle">
-            <Link to="/login">
-              {" "}
-              <AiOutlineLogin className="w-7 h-7" />
-            </Link>
-          </button>
+          {user?.uid ? (
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  {user?.photoURL ? (
+                    <img
+                      src={user?.photoURL}
+                      title={user?.name}
+                      alt={user?.name}
+                    />
+                  ) : (
+                    <img
+                      alt={user?.name}
+                      src="https://placeimg.com/80/80/people"
+                    />
+                  )}
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-200 rounded-box w-52"
+              >
+                <li>
+                  <a className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <a onClick={handleLogout}>Logout</a>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <button className="btn btn-ghost btn-circle">
+              <Link to="/login">
+                <AiOutlineLogin className="w-7 h-7" />
+              </Link>
+            </button>
+          )}
         </div>
       </div>
     </div>
