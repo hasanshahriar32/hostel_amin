@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AiOutlineLogin } from "react-icons/ai";
 
 import { GoLocation } from "react-icons/go";
 import { Link, NavLink } from "react-router-dom";
@@ -67,7 +68,7 @@ const Navbar = () => {
             <label
               // data-act-class="ACTIVECLASS"
               // data-toggle-theme="dark,light"
-              className="swap swap-rotate w-12 mr-2 visible lg:hidden bg-gray-200  dark:bg-gray-800  p-5   z-50 cursor-pointer   btn-sm btn  "
+              className="swap swap-rotate w-12  visible lg:hidden light:bg-gray-200  dark:bg-gray-800  p-5   z-50 cursor-pointer   btn-sm btn  "
               // data-choose-theme
             >
               <input type="checkbox" />
@@ -175,23 +176,10 @@ const Navbar = () => {
           {/* theme toggle end  */}
 
           <button className="btn btn-ghost btn-circle">
-            <div className="indicator">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
-              <span className="badge badge-xs badge-primary indicator-item"></span>
-            </div>
+            <Link to="/login">
+              {" "}
+              <AiOutlineLogin className="w-7 h-7" />
+            </Link>
           </button>
         </div>
       </div>
