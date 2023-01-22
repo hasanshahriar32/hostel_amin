@@ -65,7 +65,7 @@ const Providers = () => {
   };
 
   const saveUserToDb = (name, image, email, uid, userAbout) => {
-    fetch(" https://amin-mess-server.vercel.app/user", {
+    fetch("https://amin-mess-server.vercel.app/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
