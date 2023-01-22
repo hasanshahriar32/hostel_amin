@@ -24,7 +24,7 @@ const Register = () => {
   const [agree, setAgree] = useState(false);
   const [seller, setSeller] = useState(false);
   const [status, setStatus] = useState("");
-  const [userType, setUserType] = useState("buyer");
+  const [userType, setUserType] = useState("member");
   const [userUid, setuserUid] = useState("");
   const [token] = useToken(userUid);
   let location = useLocation();
