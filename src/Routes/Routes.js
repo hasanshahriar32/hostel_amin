@@ -17,8 +17,8 @@ const Routes = () => {
       element: <Main></Main>,
       children: [
         { path: "/", element: <Home></Home> },
-        { path: "/meal", element: <Meal></Meal> },
-        { path: "/bazar", element: <Bazar></Bazar> },
+        { path: "/meal", element: <PrivateRoute><Meal></Meal></PrivateRoute> },
+        { path: "/bazar", element: <PrivateRoute><Bazar></Bazar></PrivateRoute> },
         { path: "/login", element: <Login></Login> },
         { path: "/register", element: <Register></Register> },
         { path: "/profile", element: <PrivateRoute><Profile></Profile></PrivateRoute> },
