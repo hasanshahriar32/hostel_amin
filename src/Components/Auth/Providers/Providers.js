@@ -26,7 +26,7 @@ const Providers = () => {
         const image = res.user?.photoURL;
         const userAbout = "member";
         setuserUid(uid);
-        // saveUserToDb(name, image, email, uid, userAbout);
+        saveUserToDb(name, image, email, uid, userAbout);
 
         const notify = () => toast.success('Login Successful');
         notify();
@@ -51,7 +51,7 @@ const Providers = () => {
         const uid = res.user?.uid;
         const userAbout = "member";
         setuserUid(uid);
-        // saveUserToDb(name, image, email, uid, userAbout);
+        saveUserToDb(name, image, email, uid, userAbout);
         const notify = () => toast.success('Login Successful');
         notify();
         // navigate(from, { replace: true });
@@ -64,6 +64,20 @@ const Providers = () => {
       });
   };
 
+  const saveUserToDb = (name, image, email, uid, userAbout) => {
+    fetch(" https://amin-mess-server.vercel.app/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, image, email, uid, userAbout }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("save user", data);
+        setuserUid(uid);
+      });
+  };
   return <div>
     <ToastContainer />
     <div className="flex mx-16 justify-around items-center  mb-6">
