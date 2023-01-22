@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 import GLOBE from "vanta/dist/vanta.birds.min";
 import { FcGoogle } from "react-icons/fc";
 import "./login.css";
+
 import { BsGithub } from "react-icons/bs";
+
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
+// ..
+AOS.init();
 const Login = () => {
   const [vantaEffect, setVantaEffect] = useState(null);
   const myRef = useRef(null);
@@ -31,10 +37,10 @@ const Login = () => {
               et a id nisi.
             </p>
           </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div data-aos="fade-left" className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             {/* <h1 className="text-4xl font-bold mt-7 ">Welcome Back</h1> */}
 
-            <form className="card-body">
+            <form  className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
