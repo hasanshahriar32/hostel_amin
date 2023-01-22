@@ -12,6 +12,7 @@ import "aos/dist/aos.css"; // You can also use <link> for styles
 AOS.init();
 const Login = () => {
   const [vantaEffect, setVantaEffect] = useState(null);
+  const [status, setStatus] = useState("");
   const myRef = useRef(null);
   useEffect(() => {
     if (!vantaEffect) {
@@ -25,6 +26,15 @@ const Login = () => {
       if (vantaEffect) vantaEffect.destroy();
     };
   }, [vantaEffect]);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    setStatus("Loading...");
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+  };
   return (
     <div className="appBack" ref={myRef}>
       <div className="hero min-h-screen ">
@@ -37,10 +47,13 @@ const Login = () => {
               et a id nisi.
             </p>
           </div>
-          <div data-aos="fade-left" className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div
+            data-aos="fade-left"
+            className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
+          >
             {/* <h1 className="text-4xl font-bold mt-7 ">Welcome Back</h1> */}
 
-            <form  className="card-body">
+            <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -48,7 +61,9 @@ const Login = () => {
                 <input
                   type="text"
                   placeholder="email"
+                  name="email"
                   className="input input-bordered"
+                  required={true}
                 />
               </div>
               <div className="form-control">
@@ -56,9 +71,11 @@ const Login = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
+                  name="password"
                   placeholder="password"
                   className="input input-bordered"
+                  required={true}
                 />
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
