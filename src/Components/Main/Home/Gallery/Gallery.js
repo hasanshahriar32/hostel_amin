@@ -24,7 +24,12 @@ const images = [
 
 class Gallery extends React.Component {
   render() {
-    return <ImageGallery items={images} />;
+    return (
+      <div>
+        <h1 className='text-center text-3xl font-bold mb-6 my-20'>ছবির গ্যালারি</h1>
+        <ImageGallery items={images} />
+      </div>
+    );
   }
 }
 
