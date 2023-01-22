@@ -1,17 +1,35 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import GLOBE from "vanta/dist/vanta.globe.min";
 import { FcGoogle } from "react-icons/fc";
+import { useContext } from "react";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import "../Login/login.css";
+import { ToastContainer, toast } from "react-toastify";
 import Providers from "../../Auth/Providers/Providers";
 import { BsGithub } from "react-icons/bs";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
+import "react-toastify/dist/ReactToastify.css";
+import { getAuth, updateProfile } from "firebase/auth";
+import { AuthContext } from "../../Auth/Context/UserContext";
+import app from '../../Auth/Firebase/Firebase.init';
+import useToken from "../../../hooks/useToken";
 // ..
 AOS.init();
 const Register = () => {
   const [vantaEffect, setVantaEffect] = useState(null);
   const myRef = useRef(null);
+    const auth = getAuth(app);
+  const { createUser, user } = useContext(AuthContext);
+  const [agree, setAgree] = useState(false);
+  const [seller, setSeller] = useState(false);
+  const [status, setStatus] = useState("");
+  const [userType, setUserType] = useState("buyer");
+  const [userUid, setuserUid] = useState("");
+  const [token] = useToken(userUid);
+  let location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const navigate = useNavigate();
   useEffect(() => {
     if (!vantaEffect) {
       setVantaEffect(
@@ -24,6 +42,77 @@ const Register = () => {
       if (vantaEffect) vantaEffect.destroy();
     };
   }, [vantaEffect]);
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    setStatus("Loading...");
+    const email = form.email.value;
+    const password = form.password.value;
+    const name = form.name.value;
+    const image = form.image.value;
+
+    const userAbout = userType;
+    // console.log(email, password);
+    createUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        setStatus("Register Successful");
+        const notify = () => toast.success(status);
+        notify();
+        handleUpdate(name, image);
+        const uid = res.user?.uid;
+
+        saveUserToDb(name, image, email, uid, userAbout);
+      })
+      .catch((err) => {
+        console.log(err);
+        setStatus(err.message);
+        const notify = () => toast.error(status);
+        notify();
+      });
+  };
+  const saveUserToDb = (name, image, email, uid, userAbout) => {
+    fetch("https://amin-mess-server.vercel.app/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, image, email, uid, userAbout }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // getUserToken(uid);
+
+        console.log("save user", data);
+        setuserUid(uid);
+        if (token) {
+          navigate(from);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+const handleUpdate = (name, image) => {
+    updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: image,
+    })
+      .then(() => {
+        console.log("update profile success");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  if (user?.uid && localStorage.getItem("token")) {
+    console.log(token);
+    return <Navigate to={from} replace />;
+  }
+
+
   return (
     <div className="appBack" ref={myRef}>
       <div className="hero min-h-screen ">
@@ -42,7 +131,7 @@ const Register = () => {
           >
             {/* <h1 className="text-4xl font-bold mt-7 ">Welcome Back</h1> */}
 
-            <form className="card-body">
+            <form onSubmit={handleSignUp} className="card-body">
                <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -50,6 +139,18 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="your name"
+                  name='name'
+                  className="input input-bordered"
+                />
+              </div>
+               <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Image</span>
+                </label>
+                <input
+                  type="text"
+                   name='image'
+                  placeholder="your image link"
                   className="input input-bordered"
                 />
               </div>
@@ -59,6 +160,7 @@ const Register = () => {
                 </label>
                 <input
                   type="email"
+                   name='email'
                   placeholder="email"
                   className="input input-bordered"
                   required={true}
@@ -71,6 +173,7 @@ const Register = () => {
                 </label>
                 <input
                   type="password"
+                   name='password'
                   placeholder="password"
                   className="input input-bordered"
                   required={true}

@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
 import { FcGoogle } from "react-icons/fc";
   import 'react-toastify/dist/ReactToastify.css';
-
+import useToken from "../../../hooks/useToken";
 import { BsGithub } from "react-icons/bs";
 const Providers = () => {
     const [status, setStatus] = useState("");
@@ -12,6 +12,10 @@ const Providers = () => {
    let location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
+   const [token, loading] = useToken(userUid);
+    if (token && !loading) {
+    navigate(from, { replace: true });
+  }
 
 
   const { handleGoogleSignIn, handleGithubSignIn } = useContext(AuthContext);
