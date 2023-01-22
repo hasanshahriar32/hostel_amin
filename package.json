@@ -16,6 +16,7 @@
     "@syncfusion/ej2-react-calendars": "^20.4.44",
     "@syncfusion/ej2-react-dropdowns": "^20.4.43",
     "@syncfusion/ej2-react-grids": "^20.4.44",
+    "@syncfusion/ej2-react-navigations": "^20.4.44",
     "@syncfusion/ej2-react-schedule": "^20.4.44",
     "@syncfusion/ej2-react-treegrid": "^20.4.44",
     "@syncfusion/ej2-schedule": "^20.4.44",
