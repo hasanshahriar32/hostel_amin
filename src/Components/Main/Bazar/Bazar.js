@@ -1,7 +1,10 @@
-import React from "react";
+import * as React from 'react';
 
-const Bazar = () => {
-  return <div></div>;
-};
+function Bazar() {
+  return (
+    <div >
+    </div>
+  );
+}
 
 export default Bazar;
