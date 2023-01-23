@@ -64,7 +64,7 @@ const DateSelect = () => {
   // range
   const minDate = modmindate;
   const maxDate = modmaxdate;
-
+// const selectedDateForMeal = [];
   function onchange(args) {
     /*Displays selected date in the label*/
     // document.getElementById("date_label").textContent =
@@ -80,11 +80,26 @@ const DateSelect = () => {
       // make a  line break and list the selected dates
       element.insertBefore(document.createElement("br"), element.childNodes[0]);
       console.log(calendarInstance.values[index].toString() + " ");
+      // selectedDateForMeal.push(calendarInstance.values[index].toString());
+      //if data already exists then remove it
+      //if data already exists then remove it
+      if (selectedValues.includes(args.value)) {
+        const index = selectedValues.indexOf(args.value);
+        if (index > -1) {
+          selectedValues.splice(index, 1);
+        }
+      }
+      //if data does not exist then add it
+      else {
+        selectedValues.push(args.value);
+      }
+
       //set to localstorage
       //if there already is a value in localstorage then add the new after it
       const meal = localStorage.getItem("selectedMealDate");
       if (meal) {
         localStorage.setItem("selectedMealDate", meal + "," + args.value);
+
       }
       //if same date is selected twice then remove it
       else if (meal === args.value) {
@@ -99,6 +114,19 @@ const DateSelect = () => {
   const setSubmit = () => {
     localStorage.setItem("mealDate", modmindate + " " + modmaxdate);
   };
+
+
+  const setSlot =(e)=>{
+     e.preventDefault();
+     const slot = e.target.slot.value;
+      // localStorage.setItem("slot",slot);
+      const mealDate = selectedValues;
+      console.log(slot);
+      console.log(selectedValues);
+
+    
+  }
+
   return (
     <div className="text-lg lg:text-4xl py-6 text-center bg-base-200">
       <h1>আপনার মানেজারির স্থায়িত্বকাল নির্ধারণ করুন</h1>
@@ -185,12 +213,29 @@ const DateSelect = () => {
               >
                 <div id="multiselect"></div>
               </div>
-              <button
-                className="btn btn-success my-3 btn-outline"
-                type="submit"
-              >
-                Confirm
-              </button>
+              <form onSubmit={setSlot}>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Managing Slot Name</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="slot"
+                    placeholder="Hasan's July management"
+                    className="input input-bordered"
+                    required={true}
+                  />
+                </div>
+                {/* //add selectedValues to the form responsse  */}
+                
+                
+                <button
+                  className="btn btn-success my-3 btn-outline"
+                  type="submit"
+                >
+                  Confirm
+                </button>
+              </form>
             </div>
           </div>
         </div>
