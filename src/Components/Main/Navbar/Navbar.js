@@ -175,11 +175,38 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
+                    data-set-theme="halloween"
+                    onClick={() => setTheme("Halloween")}
+                    data-act-class="ACTIVECLASS"
+                  >
+                    Halloween
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     data-set-theme="cyberpunk"
                     onClick={() => setTheme("Cyberpunk")}
                     data-act-class="ACTIVECLASS"
                   >
                     Cyberpunk
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    data-set-theme="luxury"
+                    onClick={() => setTheme("Luxury")}
+                    data-act-class="ACTIVECLASS"
+                  >
+                    Luxury
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    data-set-theme="synthwave"
+                    onClick={() => setTheme("Synthwave")}
+                    data-act-class="ACTIVECLASS"
+                  >
+                    Synth
                   </Link>
                 </li>
                 <li>
