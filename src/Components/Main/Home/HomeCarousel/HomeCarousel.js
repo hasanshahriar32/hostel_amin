@@ -10,7 +10,7 @@ const HomeCarousel = () => {
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">মিনি চিরিয়াখানা</h1>
+            <h1 className="mb-5 text-5xl font-bold">দ্যা মিনি চিড়িয়াখানা</h1>
             <p className="mb-5">
               <span className='text-secondary'>
                 হাজী মোহাম্মাদ দানেশ বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়
