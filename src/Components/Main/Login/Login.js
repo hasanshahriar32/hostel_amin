@@ -126,6 +126,7 @@ const Login = () => {
                   placeholder="email"
                   defaultValue="admin@paradox-bd.com"
                   name="email"
+                  onBlur={saveMail}
                   className="input input-bordered"
                   required={true}
                 />
@@ -137,7 +138,7 @@ const Login = () => {
                 <input
                   type="password"
                   name="password"
-                   defaultValue="mysite"
+                  defaultValue="mysite"
                   placeholder="password"
                   className="input input-bordered"
                   required={true}
@@ -151,18 +152,17 @@ const Login = () => {
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>
-            <small className="text-red-500">{status}</small>
+              <small className="text-red-500">{status}</small>
             </form>
             <div className="App">
-          <small className='text-sm'>
-            forget pass?{" "}
-            <button onClick={handleresetpass} className="text-primary">
-              reset here
-            </button>
-          </small>
-        </div>
+              <small className="text-sm">
+                forget pass?{" "}
+                <button onClick={handleresetpass} className="text-primary">
+                  reset here
+                </button>
+              </small>
+            </div>
             <div class="divider mt-10 mx-12">OR</div>
-            
 
             <Providers></Providers>
             <p className="label-text-alt mb-6 ">
