@@ -346,7 +346,7 @@ export default function Bazar() {
     <Box
     className="bg-white"
       sx={{
-        height: 500,
+        height: '100vh',
         width: '100%',
         '& .actions': {
           color: 'text.secondary',
