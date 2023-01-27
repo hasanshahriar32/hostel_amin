@@ -359,7 +359,7 @@ export default function Bazar() {
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={10}
+        // pageSize={10}
         rowsPerPageOptions={[10 , 20, 50, 100]}
 // height={500}
         editMode="row"
